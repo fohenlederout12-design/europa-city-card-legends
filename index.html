@@ -1,64 +1,274 @@
+<!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EUROPA CITY</title>
+<title>EUROPA CITY : CARD LEGENDS</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
     background:#081c2e;
     color:white;
+}
+
+/* CINÉMATIQUE */
+
+#cinematic{
+    position:fixed;
+    inset:0;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+#logo{
+    font-size:60px;
+    animation:glitch 0.5s infinite;
+}
+
+@keyframes glitch{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-2px);}
+    50%{transform:translateX(2px);}
+    75%{transform:translateX(-2px);}
+    100%{transform:translateX(0);}
+}
+
+#countdown{
+    font-size:100px;
+    margin-top:20px;
+}
+
+/* MAP */
+
+#map{
+    display:none;
+    width:100vw;
+    height:100vh;
+    position:relative;
+    background:linear-gradient(#0d2c4f,#081c2e);
+}
+
+/* ROUTES */
+
+.road{
+    position:absolute;
+    background:#444;
+}
+
+.vertical{
+    width:20px;
+    height:100%;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.horizontal{
+    height:20px;
+    width:100%;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* BÂTIMENTS */
+
+.building{
+    position:absolute;
+    background:#1c4f86;
+    border:3px solid #69b7ff;
+    border-radius:20px;
+    padding:15px;
+    cursor:pointer;
+    transition:0.3s;
     text-align:center;
 }
 
-header{
-    background:#0d2c4f;
-    padding:30px;
+.building:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 20px #69b7ff;
 }
 
-main{
-    padding:40px;
-}
+/* FENÊTRE */
 
-button{
-    padding:15px 25px;
-    border:none;
-    border-radius:15px;
-    background:#2b7fff;
-    color:white;
-    font-size:18px;
-    cursor:pointer;
-}
-
-button:hover{
-    transform:scale(1.05);
+#window{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:85%;
+    background:rgba(0,0,0,0.8);
+    border:2px solid #69b7ff;
+    border-radius:20px;
+    padding:20px;
 }
 </style>
-
 </head>
 
 <body>
 
-<header>
-    <h1>🌍 EUROPA CITY : CARD LEGENDS</h1>
-    <p>Une légende ne naît pas... elle se construit.</p>
-</header>
+<div id="cinematic">
+    <div id="logo">🌍 EUROPA</div>
 
-<main>
+    <h2>Une légende ne naît pas...</h2>
+    <h2>Elle se construit.</h2>
 
-    <h2>Bienvenue dans le projet officiel EUROPA</h2>
+    <div id="countdown">3</div>
+</div>
 
-    <p>
-        Le développement d'EUROPA CITY a commencé !
-    </p>
+<div id="map">
 
-    <button onclick="alert('Bientôt : la vraie map EUROPA CITY !')">
-        🚀 Découvrir EUROPA
-    </button>
+    <div class="road vertical"></div>
+    <div class="road horizontal"></div>
 
-</main>
+    <div class="building" style="top:8%;left:42%;" onclick="showInfo('mascotte')">
+        🐾<br>Mascotte
+    </div>
+
+    <div class="building" style="top:25%;left:5%;" onclick="showInfo('staff')">
+        👥<br>Staff HQ
+    </div>
+
+    <div class="building" style="top:25%;right:5%;" onclick="showInfo('resultats')">
+        🏆<br>Résultats
+    </div>
+
+    <div class="building" style="top:45%;left:3%;" onclick="showInfo('annonces')">
+        📢<br>Annonces
+    </div>
+
+    <div class="building" style="top:42%;left:42%;" onclick="showInfo('qg')">
+        🏰<br>QG EUROPA
+    </div>
+
+    <div class="building" style="top:45%;right:3%;" onclick="showInfo('reseaux')">
+        📱<br>Réseaux
+    </div>
+
+    <div class="building" style="top:70%;left:42%;" onclick="showInfo('cartes')">
+        🃏<br>Académie
+    </div>
+
+    <div class="building" style="top:85%;left:42%;" onclick="showInfo('planning')">
+        📅<br>Planning
+    </div>
+
+    <div id="window">
+        🎉 Bienvenue dans EUROPA CITY !
+    </div>
+
+</div>
+
+<script>
+let number = 3;
+
+const timer = setInterval(() => {
+
+    number--;
+
+    const countdown =
+    document.getElementById("countdown");
+
+    if(number > 0){
+
+        countdown.textContent = number;
+
+    }
+
+    else if(number === 0){
+
+        countdown.textContent = "GO";
+
+    }
+
+    else{
+
+        clearInterval(timer);
+
+        document.getElementById("cinematic").style.display = "none";
+
+        document.getElementById("map").style.display = "block";
+
+    }
+
+},1000);
+
+function showInfo(place){
+
+    const windowBox =
+    document.getElementById("window");
+
+    const data = {
+
+        qg: `
+        <h2>🏰 QG EUROPA</h2>
+        🎉 Calvin rejoint officiellement EUROPA !
+        `,
+
+        annonces: `
+        <h2>📢 Annonces</h2>
+        Nouvelle recrue : CALVIN ⚡
+        `,
+
+        staff: `
+        <h2>👥 Staff</h2>
+        👑 SH3RKO<br>
+        🏆 Z3RK<br>
+        🎮 RAPHAËL<br>
+        🎮 BATISTOSS<br>
+        ⚡ CALVIN
+        `,
+
+        resultats: `
+        <h2>🏆 Résultats</h2>
+        Aucun résultat pour le moment.
+        `,
+
+        mascotte: `
+        <h2>🐾 Mascotte</h2>
+        Chapitre I<br>
+        Chapitre II<br>
+        Chapitre III<br>
+        Chapitre IV
+        `,
+
+        reseaux: `
+        <h2>📱 Réseaux</h2>
+
+        Twitch : europa_haru<br><br>
+
+        TikTok : @user_mez99<br><br>
+
+        Discord :
+        discord.gg/36Tj2Jf55S
+        `,
+
+        cartes: `
+        <h2>🃏 Académie</h2>
+
+        Les packs arrivent bientôt...
+        `,
+
+        planning: `
+        <h2>📅 Planning</h2>
+
+        Mardi : Fortnite<br>
+
+        Jeudi : Rocket League<br>
+
+        Vendredi : Chill
+        `
+    };
+
+    windowBox.innerHTML =
+    data[place];
+}
+</script>
 
 </body>
 </html>
