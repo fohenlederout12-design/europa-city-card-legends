@@ -3,271 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EUROPA CITY : CARD LEGENDS</title>
+<title>EUROPA CITY</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    overflow:hidden;
-    background:#081c2e;
-    color:white;
+background:black;
+overflow:hidden;
+color:white;
 }
 
 /* CINÉMATIQUE */
 
 #cinematic{
-    position:fixed;
-    inset:0;
-    background:black;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:radial-gradient(circle,#0b1c3d,#000);
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:1000;
 }
 
 #logo{
-    font-size:60px;
-    animation:glitch 0.5s infinite;
+font-size:70px;
+color:#55c8ff;
+text-shadow:0 0 30px #55c8ff;
+animation:pulse 2s infinite;
 }
 
-@keyframes glitch{
-    0%{transform:translateX(0);}
-    25%{transform:translateX(-2px);}
-    50%{transform:translateX(2px);}
-    75%{transform:translateX(-2px);}
-    100%{transform:translateX(0);}
+@keyframes pulse{
+
+0%{
+transform:scale(1);
 }
 
-#countdown{
-    font-size:100px;
-    margin-top:20px;
+50%{
+transform:scale(1.08);
+}
+
+100%{
+transform:scale(1);
+}
+
+}
+
+#text1{
+margin-top:30px;
+font-size:25px;
+opacity:0;
+animation:show1 2s forwards;
+animation-delay:1s;
+}
+
+#text2{
+margin-top:20px;
+font-size:25px;
+opacity:0;
+animation:show2 2s forwards;
+animation-delay:3s;
+}
+
+@keyframes show1{
+100%{
+opacity:1;
+}
+}
+
+@keyframes show2{
+100%{
+opacity:1;
+}
 }
 
 /* MAP */
 
-#map{
-    display:none;
-    width:100vw;
-    height:100vh;
-    position:relative;
-    background:linear-gradient(#0d2c4f,#081c2e);
+#city{
+display:none;
+width:100vw;
+height:100vh;
+background:
+linear-gradient(#081221,#0d2342);
+justify-content:center;
+align-items:center;
+flex-direction:column;
 }
 
-/* ROUTES */
-
-.road{
-    position:absolute;
-    background:#444;
+#title{
+font-size:50px;
+color:#55c8ff;
+text-shadow:0 0 20px #55c8ff;
 }
 
-.vertical{
-    width:20px;
-    height:100%;
-    left:50%;
-    transform:translateX(-50%);
+#soon{
+margin-top:30px;
+font-size:25px;
 }
 
-.horizontal{
-    height:20px;
-    width:100%;
-    top:50%;
-    transform:translateY(-50%);
-}
-
-/* BÂTIMENTS */
-
-.building{
-    position:absolute;
-    background:#1c4f86;
-    border:3px solid #69b7ff;
-    border-radius:20px;
-    padding:15px;
-    cursor:pointer;
-    transition:0.3s;
-    text-align:center;
-}
-
-.building:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 20px #69b7ff;
-}
-
-/* FENÊTRE */
-
-#window{
-    position:absolute;
-    bottom:20px;
-    left:50%;
-    transform:translateX(-50%);
-    width:85%;
-    background:rgba(0,0,0,0.8);
-    border:2px solid #69b7ff;
-    border-radius:20px;
-    padding:20px;
-}
 </style>
 </head>
-
 <body>
 
 <div id="cinematic">
-    <div id="logo">🌍 EUROPA</div>
 
-    <h2>Une légende ne naît pas...</h2>
-    <h2>Elle se construit.</h2>
-
-    <div id="countdown">3</div>
+<div id="logo">
+🌍 EUROPA
 </div>
 
-<div id="map">
+<div id="text1">
+UNE LÉGENDE NE NAÎT PAS...
+</div>
 
-    <div class="road vertical"></div>
-    <div class="road horizontal"></div>
+<div id="text2">
+ELLE SE CONSTRUIT.
+</div>
 
-    <div class="building" style="top:8%;left:42%;" onclick="showInfo('mascotte')">
-        🐾<br>Mascotte
-    </div>
+</div>
 
-    <div class="building" style="top:25%;left:5%;" onclick="showInfo('staff')">
-        👥<br>Staff HQ
-    </div>
+<div id="city">
 
-    <div class="building" style="top:25%;right:5%;" onclick="showInfo('resultats')">
-        🏆<br>Résultats
-    </div>
+<div id="title">
+EUROPA CITY
+</div>
 
-    <div class="building" style="top:45%;left:3%;" onclick="showInfo('annonces')">
-        📢<br>Annonces
-    </div>
-
-    <div class="building" style="top:42%;left:42%;" onclick="showInfo('qg')">
-        🏰<br>QG EUROPA
-    </div>
-
-    <div class="building" style="top:45%;right:3%;" onclick="showInfo('reseaux')">
-        📱<br>Réseaux
-    </div>
-
-    <div class="building" style="top:70%;left:42%;" onclick="showInfo('cartes')">
-        🃏<br>Académie
-    </div>
-
-    <div class="building" style="top:85%;left:42%;" onclick="showInfo('planning')">
-        📅<br>Planning
-    </div>
-
-    <div id="window">
-        🎉 Bienvenue dans EUROPA CITY !
-    </div>
+<div id="soon">
+🚧 Construction de la ville...
+</div>
 
 </div>
 
 <script>
-let number = 3;
 
-const timer = setInterval(() => {
+setTimeout(()=>{
 
-    number--;
+document.getElementById("cinematic").style.display="none";
 
-    const countdown =
-    document.getElementById("countdown");
+document.getElementById("city").style.display="flex";
 
-    if(number > 0){
+},6000);
 
-        countdown.textContent = number;
-
-    }
-
-    else if(number === 0){
-
-        countdown.textContent = "GO";
-
-    }
-
-    else{
-
-        clearInterval(timer);
-
-        document.getElementById("cinematic").style.display = "none";
-
-        document.getElementById("map").style.display = "block";
-
-    }
-
-},1000);
-
-function showInfo(place){
-
-    const windowBox =
-    document.getElementById("window");
-
-    const data = {
-
-        qg: `
-        <h2>🏰 QG EUROPA</h2>
-        🎉 Calvin rejoint officiellement EUROPA !
-        `,
-
-        annonces: `
-        <h2>📢 Annonces</h2>
-        Nouvelle recrue : CALVIN ⚡
-        `,
-
-        staff: `
-        <h2>👥 Staff</h2>
-        👑 SH3RKO<br>
-        🏆 Z3RK<br>
-        🎮 RAPHAËL<br>
-        🎮 BATISTOSS<br>
-        ⚡ CALVIN
-        `,
-
-        resultats: `
-        <h2>🏆 Résultats</h2>
-        Aucun résultat pour le moment.
-        `,
-
-        mascotte: `
-        <h2>🐾 Mascotte</h2>
-        Chapitre I<br>
-        Chapitre II<br>
-        Chapitre III<br>
-        Chapitre IV
-        `,
-
-        reseaux: `
-        <h2>📱 Réseaux</h2>
-
-        Twitch : europa_haru<br><br>
-
-        TikTok : @user_mez99<br><br>
-
-        Discord :
-        discord.gg/36Tj2Jf55S
-        `,
-
-        cartes: `
-        <h2>🃏 Académie</h2>
-
-        Les packs arrivent bientôt...
-        `,
-
-        planning: `
-        <h2>📅 Planning</h2>
-
-        Mardi : Fortnite<br>
-
-        Jeudi : Rocket League<br>
-
-        Vendredi : Chill
-        `
-    };
-
-    windowBox.innerHTML =
-    data[place];
-}
 </script>
 
 </body>
